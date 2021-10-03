@@ -1,0 +1,33 @@
+//Copy files
+
+
+#include <stdio.h>
+
+#include <unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
+
+void main(){
+    
+    int n;
+    char ch[1000];
+    
+    int fd=open("file.txt",O_RDONLY);
+    
+    if(fd==-1){
+        printf("Source file not found\n");
+        exit(1);
+    }    
+        
+    int fd1=open("copy.txt",O_WRONLY | O_CREAT);
+    printf("The contents of copy file is \n");
+    while( (n = read(fd,ch,sizeof(ch))) > 0 ) {
+        write(fd1,ch,n);
+        write(1,ch,n);
+    }
+    printf("\n");
+    
+    close(fd);
+    close(fd1);
+    
+}
