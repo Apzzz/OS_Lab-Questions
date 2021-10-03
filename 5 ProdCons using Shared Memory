@@ -1,0 +1,71 @@
+//Producer Consumer problem
+
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int full = 0, buffer = 10, x = 0, y = 0;
+
+void
+producer ()
+{
+  printf ("Enter the no of items ");
+  scanf ("%d", &y);
+  if(y<=buffer){
+      full+=y;
+      buffer-=y;
+      x+=y;
+      printf ("Producer produces %d items \n\n", y);
+
+  }
+  else
+    printf ("Cannot produce %d items ! \n\n",y);
+}
+
+
+void
+consumer ()
+{
+  --full;
+  ++buffer;
+  printf ("Consumer consumes item %d\n\n", x);
+  x--;
+}
+
+int
+main ()
+{
+  int n;
+
+  while (1)
+    {
+
+      printf ("Enter 1 for Producer\nEnter 2 for Consumer" "\nEnter 0 for Exit \t");
+      scanf ("%d", &n);
+
+      switch (n)
+	{
+	case 1:
+	  if (buffer != 0)
+	    producer ();
+
+	  else
+	    printf ("Buffer is full!\n\n");
+	  break;
+
+	case 2:
+	  if (full != 0)
+	    consumer ();
+
+	  else
+	    printf ("Buffer is empty!\n\n");
+	  break;
+
+	case 0:
+	  exit (0);
+	  break;
+	}
+    }
+}
+
+
