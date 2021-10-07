@@ -26,38 +26,6 @@ void sort(int k){
                 if(k==3)
                     swap(&priority[i],&priority[i+1]);
             }
-            else if(arrival[i]==arrival[i+1])
-            {
-                switch(k)
-                {
-                    case 1: if(process[i]>process[i+1])
-                            {;
-                                swap(&burst[i],&burst[i+1]);
-                                swap(&process[i],&process[i+1]);
-                            }
-                            break;
-                    case 2: if(burst[i]>burst[i+1])
-                            {
-                                swap(&burst[i],&burst[i+1]);
-                                swap(&process[i],&process[i+1]);
-                            }
-                            break; 
-                    case 3: if(process[i]>process[i+1])
-                            {
-                                swap(&burst[i],&burst[i+1]);
-                                swap(&process[i],&process[i+1]);
-                                swap(&priority[i],&priority[i+1]);
-                            }
-                            break;
-                    case 4:  if(process[i]>process[i+1])
-                            {
-                                swap(&burst[i],&burst[i+1]);
-                                swap(&process[i],&process[i+1]);
-                            }
-                            break;
-                }    
-            }
-            
         }
     }
 }
@@ -168,6 +136,7 @@ void sjf(){
 
 int psort(int a[], int s)
 {
+	int x,ind=-1;
 		for(int i =0;i<s; i++)
 		{
 			for(int j=i+1;j<s;j++)
@@ -286,52 +255,24 @@ void roundrobin(){
 		dis();
 		if(bt[last[front]]<= tq && bt[last[front]] >0 && r>0)
 		{
-			if(waiting[last[front]]== -1)
-			{
-				//wait[last[front]] = time-arrival[last[front]];
-				time += bt[last[front]];
-				bt[last[front]] = 0;
-				turnaround[last[front]] = time - arrival[last[front]];
-				waiting[last[front]] = turnaround[last[front]] - burst[last[front]];
-				t = pop();
-				r--;
-				f =0;
-			}
-			else
-			{
-				time += bt[last[front]];
-				bt[last[front]] = 0;
-				turnaround[last[front]] = time - arrival[last[front]];
-				waiting[last[front]] = turnaround[last[front]] - burst[last[front]];
-				t = pop();
-				r--;
-				f =0;
-			}
-			
+			time += bt[last[front]];
+			bt[last[front]] = 0;
+			turnaround[last[front]] = time - arrival[last[front]];
+			waiting[last[front]] = turnaround[last[front]] - burst[last[front]];
+			t = pop();
+			r--;
+			f =0;
 		}
 		else if(bt[last[front]] > 0 && r>0)
 		{
-			if(waiting[last[front]]== -1)
-			{
-				//wait[last[front]] = time-arrival[last[front]];
-				time += tq;
-				bt[last[front]] -= tq;
-				t = pop();
-				f =1;
-			}
-			else
-			{
-				time += tq;
-				bt[last[front]] -= tq;
-				t = pop();
-				f=1;
-			}
-	//		printf("\n %i",time);
+			time += tq;
+			bt[last[front]] -= tq;
+			t = pop();
+			f =1;
+
 		}
 		else
-		{
-			time++;
-		}	 
+			time++;	 
 	}
     avg();
     display(4);
