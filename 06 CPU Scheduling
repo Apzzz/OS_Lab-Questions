@@ -136,16 +136,13 @@ void sjf(){
 
 int psort(int a[], int s)
 {
-	int x,ind=-1;
-		for(int i =0;i<s; i++)
-		{
-			for(int j=i+1;j<s;j++)
-			{
-				if(priority[a[j]]<priority[a[i]])
-					swap(&a[j],&a[i]);
-			}
-		}
-		return(a[0]);
+    int ind=0;
+    for (int i = 0; i < s; i++)
+    {
+        if (prio[a[i]] < prio[a[ind]])
+            ind=i;
+    }
+    return (a[ind]);
 }
 
 int remain()
