@@ -1,4 +1,5 @@
-// CPU Scheduling
+//program for cpu scheduling
+//author aparna dinesh 
 
 #include<stdio.h>
 #include<stdlib.h>
