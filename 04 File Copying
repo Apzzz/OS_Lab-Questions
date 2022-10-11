@@ -1,4 +1,5 @@
-//Copy files
+//Copy contents of one file to another
+//Author: APARNA DINESH
 
 
 #include <stdio.h>
